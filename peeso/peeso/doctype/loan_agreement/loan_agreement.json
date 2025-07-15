@@ -1,0 +1,173 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{customer}-{loan_agreement_number}",
+ "creation": "2025-06-24 13:02:39.864431",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "loan_agreement_number",
+  "customer",
+  "guarantor",
+  "loan_purpose",
+  "column_break_rnrp",
+  "loan_approval_date",
+  "loan_start_date",
+  "loan_end_date",
+  "section_break_mffp",
+  "loan_type",
+  "loan_amount",
+  "loan_duration",
+  "total_collection",
+  "column_break_funk",
+  "amount_given_in",
+  "interest_rate",
+  "emi_amount",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fetch_from": "amended_from.loan_agreement_number",
+   "fieldname": "loan_agreement_number",
+   "fieldtype": "Data",
+   "label": "Loan Agreement Number"
+  },
+  {
+   "fetch_from": "amended_from.customer",
+   "fieldname": "customer",
+   "fieldtype": "Data",
+   "label": "Customer",
+   "options": "Customer",
+   "unique": 1
+  },
+  {
+   "fetch_from": "amended_from.guarantor",
+   "fieldname": "guarantor",
+   "fieldtype": "Data",
+   "label": "Guarantor"
+  },
+  {
+   "fetch_from": "amended_from.loan_purpose",
+   "fieldname": "loan_purpose",
+   "fieldtype": "Small Text",
+   "label": "Loan Purpose"
+  },
+  {
+   "fieldname": "column_break_rnrp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "amended_from.loan_approval_date",
+   "fieldname": "loan_approval_date",
+   "fieldtype": "Data",
+   "label": "Loan Approval Date"
+  },
+  {
+   "fetch_from": "amended_from.loan_start_date",
+   "fieldname": "loan_start_date",
+   "fieldtype": "Data",
+   "label": "Loan Start Date"
+  },
+  {
+   "fetch_from": "amended_from.loan_end_date",
+   "fieldname": "loan_end_date",
+   "fieldtype": "Data",
+   "label": "Loan End Date"
+  },
+  {
+   "fieldname": "section_break_mffp",
+   "fieldtype": "Section Break",
+   "label": "Amount Details"
+  },
+  {
+   "fetch_from": "amended_from.loan_type",
+   "fieldname": "loan_type",
+   "fieldtype": "Data",
+   "label": "Loan Type",
+   "options": "\nFlat Interest\nReducing Rate Interest"
+  },
+  {
+   "fetch_from": "amended_from.loan_amount",
+   "fieldname": "loan_amount",
+   "fieldtype": "Data",
+   "label": "Loan Amount"
+  },
+  {
+   "fetch_from": "amended_from.loan_duration",
+   "fieldname": "loan_duration",
+   "fieldtype": "Data",
+   "label": "Loan Duration(In months)"
+  },
+  {
+   "fetch_from": "amended_from.total_collection",
+   "fieldname": "total_collection",
+   "fieldtype": "Data",
+   "label": "Total Collection"
+  },
+  {
+   "fieldname": "column_break_funk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "amended_from.amount_given_in",
+   "fieldname": "amount_given_in",
+   "fieldtype": "Select",
+   "label": "Amount Given in",
+   "options": "Bank\nCash"
+  },
+  {
+   "fetch_from": "amended_from.interest_rate",
+   "fieldname": "interest_rate",
+   "fieldtype": "Data",
+   "label": "Interest Rate(Annually)"
+  },
+  {
+   "fetch_from": "amended_from.emi_amount",
+   "fieldname": "emi_amount",
+   "fieldtype": "Data",
+   "label": "EMI Amount"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Loan Agreement",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [
+  {
+   "link_doctype": "Customer",
+   "link_fieldname": "name"
+  }
+ ],
+ "modified": "2025-06-24 14:16:30.966771",
+ "modified_by": "Administrator",
+ "module": "Peeso",
+ "name": "Loan Agreement",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

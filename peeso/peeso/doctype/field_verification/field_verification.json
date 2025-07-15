@@ -1,0 +1,102 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-06-20 13:35:01.094069",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_r3he",
+  "amended_from",
+  "customer",
+  "google_location",
+  "fi_remarks",
+  "column_break_oxwn",
+  "fi_agent",
+  "image_1",
+  "image_2",
+  "image_3"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_r3he",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Loan Details",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "google_location",
+   "fieldtype": "Data",
+   "label": "Google Location"
+  },
+  {
+   "fieldname": "fi_remarks",
+   "fieldtype": "Small Text",
+   "label": "FI Remarks"
+  },
+  {
+   "fieldname": "column_break_oxwn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "image_1",
+   "fieldtype": "Attach Image",
+   "label": "Image 1"
+  },
+  {
+   "fieldname": "image_2",
+   "fieldtype": "Attach Image",
+   "label": "Image 2"
+  },
+  {
+   "fieldname": "image_3",
+   "fieldtype": "Attach Image",
+   "label": "Image 3"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "fi_agent",
+   "fieldtype": "Data",
+   "label": "FI Agent"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2025-06-24 13:11:37.533479",
+ "modified_by": "Administrator",
+ "module": "Peeso",
+ "name": "Field Verification",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

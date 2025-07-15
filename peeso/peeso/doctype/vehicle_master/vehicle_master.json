@@ -1,0 +1,124 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-06-15 21:23:28.164434",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "vehicle_company",
+  "vehicle_model",
+  "vehicle_model_year",
+  "rto",
+  "registration_number",
+  "registration_date",
+  "engine_number",
+  "chassis_number",
+  "column_break_vpzj",
+  "permit_expiry_date",
+  "tax_expiry_date",
+  "fitness_expiry_date",
+  "column_break_kcow",
+  "hp_location",
+  "hp_start_date"
+ ],
+ "fields": [
+  {
+   "fieldname": "vehicle_company",
+   "fieldtype": "Data",
+   "label": "Vehicle Company"
+  },
+  {
+   "fieldname": "vehicle_model",
+   "fieldtype": "Data",
+   "label": "Vehicle Model"
+  },
+  {
+   "fieldname": "vehicle_model_year",
+   "fieldtype": "Int",
+   "label": "Vehicle Model Year"
+  },
+  {
+   "fieldname": "rto",
+   "fieldtype": "Data",
+   "label": "RTO"
+  },
+  {
+   "fieldname": "registration_number",
+   "fieldtype": "Data",
+   "label": "Registration Number"
+  },
+  {
+   "fieldname": "registration_date",
+   "fieldtype": "Date",
+   "label": "Registration Date"
+  },
+  {
+   "fieldname": "engine_number",
+   "fieldtype": "Data",
+   "label": "Engine Number"
+  },
+  {
+   "fieldname": "chassis_number",
+   "fieldtype": "Data",
+   "label": "Chassis Number"
+  },
+  {
+   "fieldname": "column_break_vpzj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "permit_expiry_date",
+   "fieldtype": "Date",
+   "label": "Permit Expiry Date"
+  },
+  {
+   "fieldname": "tax_expiry_date",
+   "fieldtype": "Date",
+   "label": "Tax Expiry Date"
+  },
+  {
+   "fieldname": "fitness_expiry_date",
+   "fieldtype": "Date",
+   "label": "Fitness Expiry Date"
+  },
+  {
+   "fieldname": "column_break_kcow",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "hp_location",
+   "fieldtype": "Date",
+   "label": "HP Location"
+  },
+  {
+   "fieldname": "hp_start_date",
+   "fieldtype": "Date",
+   "label": "HP Start Date"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-06-15 21:27:45.640926",
+ "modified_by": "Administrator",
+ "module": "Peeso",
+ "name": "Vehicle Master",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

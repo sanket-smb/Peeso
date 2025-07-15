@@ -1,0 +1,193 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{customer}-{loan_agreement_number}",
+ "creation": "2025-06-20 13:57:42.010971",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "loan_agreement_number",
+  "customer",
+  "guarantor",
+  "loan_purpose",
+  "column_break_rnrp",
+  "loan_approval_date",
+  "loan_start_date",
+  "loan_end_date",
+  "column_break_eyaf",
+  "total_installments",
+  "amended_from",
+  "section_break_mffp",
+  "loan_type",
+  "loan_amount",
+  "loan_duration",
+  "total_collection",
+  "column_break_funk",
+  "amount_given_in",
+  "interest_rate",
+  "emi_amount",
+  "section_break_wdrn",
+  "emi_schedule"
+ ],
+ "fields": [
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "guarantor",
+   "fieldtype": "Link",
+   "label": "Guarantor",
+   "options": "Guarantor"
+  },
+  {
+   "fieldname": "loan_purpose",
+   "fieldtype": "Small Text",
+   "label": "Loan Purpose"
+  },
+  {
+   "fieldname": "column_break_rnrp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "loan_approval_date",
+   "fieldtype": "Date",
+   "label": "Loan Approval Date"
+  },
+  {
+   "fieldname": "loan_start_date",
+   "fieldtype": "Date",
+   "label": "Loan Start Date"
+  },
+  {
+   "fieldname": "loan_end_date",
+   "fieldtype": "Date",
+   "label": "Loan End Date"
+  },
+  {
+   "fieldname": "column_break_eyaf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_installments",
+   "fieldtype": "Int",
+   "label": "Total Installments"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Loan Details",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "section_break_mffp",
+   "fieldtype": "Section Break",
+   "label": "Amount Details"
+  },
+  {
+   "fieldname": "loan_type",
+   "fieldtype": "Select",
+   "label": "Loan Type",
+   "options": "\nFlat Interest\nReducing Rate Interest"
+  },
+  {
+   "fieldname": "loan_amount",
+   "fieldtype": "Currency",
+   "label": "Loan Amount"
+  },
+  {
+   "fieldname": "total_collection",
+   "fieldtype": "Data",
+   "label": "Total Collection"
+  },
+  {
+   "fieldname": "column_break_funk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "amount_given_in",
+   "fieldtype": "Select",
+   "label": "Amount Given in",
+   "options": "Bank\nCash"
+  },
+  {
+   "fieldname": "emi_amount",
+   "fieldtype": "Currency",
+   "label": "EMI Amount"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Loan Details",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "loan_duration",
+   "fieldtype": "Int",
+   "label": "Loan Duration(In months)"
+  },
+  {
+   "fieldname": "interest_rate",
+   "fieldtype": "Float",
+   "label": "Interest Rate(Annually)"
+  },
+  {
+   "fieldname": "loan_agreement_number",
+   "fieldtype": "Data",
+   "label": "Loan Agreement Number"
+  },
+  {
+   "fieldname": "section_break_wdrn",
+   "fieldtype": "Section Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "emi_schedule",
+   "fieldtype": "Table",
+   "label": "EMI",
+   "options": "EMI Collection"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [
+  {
+   "link_doctype": "Customer",
+   "link_fieldname": "name"
+  }
+ ],
+ "modified": "2025-07-07 12:41:54.064757",
+ "modified_by": "Administrator",
+ "module": "Peeso",
+ "name": "Loan Details",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
