@@ -1,0 +1,68 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Guarantor",
+  "enabled": 0,
+  "modified": "2025-06-20 13:40:31.014414",
+  "module": null,
+  "name": "Fetch address",
+  "script": "frappe.ui.form.on(\"Guarantor\", {\r\n  address_link: function(frm) {\r\n    if (frm.doc.address_link) {\r\n      // Call ERPNext helper to get formatted HTML\r\n      frm.call({\r\n        method: \"frappe.contacts.doctype.address.address.get_address_display\",\r\n        args: { address_dict: frm.doc.address },\r\n        callback: function(r) {\r\n          // Insert the HTML into your page\r\n          if (r.message) {\r\n            frm.fields_dict.address_html.$wrapper.html(r.message);\r\n          }\r\n        }\r\n      });\r\n    } else {\r\n      // Clear if no address selected\r\n      frm.fields_dict.address_html.$wrapper.empty();\r\n    }\r\n  }\r\n});\r\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Customer",
+  "enabled": 1,
+  "modified": "2025-06-21 15:55:08.165017",
+  "module": null,
+  "name": "Add loan detais",
+  "script": "frappe.ui.form.on('Customer', {\r\n  refresh(frm) {\r\n    // only on saved Customers\r\n    if (!frm.is_new()) {\r\n      frm.add_custom_button(__('Loan'), () => {\r\n        // open a new Field Verification, pre‑link the customer\r\n        frappe.new_doc('Loan Details', {\r\n          customer: frm.doc.name\r\n        });\r\n      }, __('Create'));\r\n    }\r\n  }\r\n});",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Loan Details",
+  "enabled": 1,
+  "modified": "2025-06-21 14:40:37.445131",
+  "module": null,
+  "name": "FI Verification",
+  "script": "frappe.ui.form.on('Loan Details', {\r\n  refresh(frm) {\r\n    // only on saved Customers\r\n    if (!frm.is_new()) {\r\n      frm.add_custom_button(__('Field Verification'), () => {\r\n        // open a new Field Verification, pre‑link the customer\r\n        frappe.new_doc('Field Verification', {\r\n          customer: frm.doc.name\r\n        });\r\n      }, __('Create'));\r\n    }\r\n  }\r\n});\r\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Loan Details",
+  "enabled": 1,
+  "modified": "2025-07-01 15:01:22.947757",
+  "module": null,
+  "name": "Emi calulations",
+  "script": "frappe.ui.form.on('Loan Details', {\r\n    // --- existing triggers for EMI calc & duration ---\r\n    onload:       function(frm) { calculate_loan_fields(frm); },\r\n    refresh:      function(frm) { \r\n        calculate_loan_fields(frm);\r\n\r\n        // ======== BUTTONS ========\r\n        // Generate the EMI schedule\r\n        frm.add_custom_button('Generate EMI Schedule', () => generate_schedule(frm));\r\n        // Recalculate outstanding/status\r\n        frm.add_custom_button('Recalculate EMI',     () => recalc_emi(frm));\r\n    },\r\n    validate:     function(frm) { calculate_loan_fields(frm); },\r\n\r\n    loan_type:        function(frm) { calculate_loan_fields(frm); },\r\n    loan_amount:      function(frm) { calculate_loan_fields(frm); },\r\n    loan_duration:    function(frm) { calculate_loan_fields(frm); },\r\n    interest_rate:    function(frm) { calculate_loan_fields(frm); },\r\n\r\n    loan_start_date:  function(frm) { calculate_loan_duration(frm); },\r\n    loan_end_date:    function(frm) { calculate_loan_duration(frm); },\r\n});\r\n\r\n// -------------------------\r\n// BUTTON HANDLERS\r\n// -------------------------\r\n\r\n// 1) Build EMI Schedule using existing frm.doc.emi_amount, loan_duration & start_date\r\nfunction generate_schedule(frm) {\r\n    if (!frm.doc.emi_amount || !frm.doc.loan_duration || !frm.doc.loan_start_date) {\r\n        frappe.msgprint('Please make sure EMI Amount, Loan Duration & Loan Start Date are set.');\r\n        return;\r\n    }\r\n\r\n    // clear old schedule\r\n    frm.clear_table('emi_schedule');\r\n\r\n    // populate rows\r\n    for (let i = 1; i <= frm.doc.loan_duration; i++) {\r\n        let row = frm.add_child('emi_schedule');\r\n        row.installment_no     = i;\r\n        row.due_date           = frappe.datetime.add_months(frm.doc.loan_start_date, i - 1);\r\n        row.emi_amount         = frm.doc.emi_amount;\r\n        row.status             = 'Pending';\r\n        row.outstanding_amount = frm.doc.emi_amount;\r\n    }\r\n\r\n    frm.refresh_field('emi_schedule');\r\n}\r\n\r\n// 2) Recalculate outstanding_amount & status for each row\r\nfunction recalc_emi(frm) {\r\n    if (!frm.doc.emi_schedule?.length) {\r\n        frappe.msgprint('No EMI schedule found. Please Generate EMI Schedule first.');\r\n        return;\r\n    }\r\n\r\n    frm.doc.emi_schedule.forEach(row => {\r\n        let paid = parseFloat(row.amount_paid) || 0.0;\r\n        let emi  = parseFloat(row.emi_amount)   || 0.0;\r\n        let out  = frappe.utils.round(emi - paid, 2);\r\n\r\n        frappe.model.set_value(row.doctype, row.name, 'outstanding_amount', out);\r\n        frappe.model.set_value(row.doctype, row.name, 'status',\r\n            out <= 0 ? 'Paid' : 'Pending'\r\n        );\r\n    });\r\n\r\n    frm.refresh_field('emi_schedule');\r\n}\r\n\r\n// -------------------------\r\n// YOUR EXISTING FUNCTIONS\r\n// -------------------------\r\n\r\nfunction calculate_loan_fields(frm) {\r\n    var type = (frm.doc.loan_type || '').trim().toLowerCase();\r\n    var P = frm.doc.loan_amount || 0;\r\n    var n = frm.doc.loan_duration || 0;\r\n    var r_annual = frm.doc.interest_rate || 0;\r\n\r\n    if (!type || P <= 0 || n <= 0 || r_annual < 0) {\r\n        frm.set_value('emi_amount', 0);\r\n        frm.set_value('total_collection', 0);\r\n        return;\r\n    }\r\n\r\n    var emi = 0.0;\r\n    var total = 0.0;\r\n\r\n    if (type === 'flat interest') {\r\n        var total_interest = P * (r_annual / 100) * (n / 12);\r\n        total = P + total_interest;\r\n        emi = total / n;\r\n    }\r\n    else if (type === 'reducing rate interest' || type === 'reducin rate interest') {\r\n        var r = (r_annual / 100) / 12;\r\n        if (r === 0) {\r\n            emi = P / n;\r\n        } else {\r\n            emi = (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);\r\n        }\r\n        total = emi * n;\r\n    }\r\n    else {\r\n        frappe.msgprint(__('Unknown Loan Type: {0}', [frm.doc.loan_type]));\r\n        frm.set_value('emi_amount', 0);\r\n        frm.set_value('total_collection', 0);\r\n        return;\r\n    }\r\n\r\n    emi = flt(emi, 2);\r\n    total = flt(total, 2);\r\n\r\n    frm.set_value('emi_amount', emi);\r\n    frm.set_value('total_collection', total);\r\n}\r\n\r\nfunction calculate_loan_duration(frm) {\r\n    if (frm.doc.loan_start_date && frm.doc.loan_end_date) {\r\n        var start = frappe.datetime.str_to_obj(frm.doc.loan_start_date);\r\n        var end = frappe.datetime.str_to_obj(frm.doc.loan_end_date);\r\n\r\n        if (start && end && end > start) {\r\n            var months = (end.getFullYear() - start.getFullYear()) * 12\r\n                       + (end.getMonth() - start.getMonth());\r\n            frm.set_value('loan_duration', months);\r\n            calculate_loan_fields(frm);\r\n        } else {\r\n            frm.set_value('loan_duration', 0);\r\n            frm.set_value('emi_amount', 0);\r\n            frm.set_value('total_collection', 0);\r\n        }\r\n    }\r\n}\r\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Loan Details",
+  "enabled": 1,
+  "modified": "2025-06-24 14:17:20.424873",
+  "module": null,
+  "name": "create_agreement",
+  "script": "frappe.ui.form.on('Loan Details', {\r\n  refresh(frm) {\r\n    // only show after the document has been saved\r\n    if (!frm.is_new()) {\r\n      frm.add_custom_button(__('Create Loan Agreement'), () => {\r\n        // build an args object containing every field from Loan Details\r\n        const args = {\r\n          loan_agreement_number: frm.doc.loan_agreement_number,\r\n          customer:              frm.doc.customer,\r\n          guarantor:             frm.doc.guarantor,\r\n          loan_purpose:          frm.doc.loan_purpose,\r\n          loan_approval_date:    frm.doc.loan_approval_date,\r\n          loan_start_date:       frm.doc.loan_start_date,\r\n          loan_end_date:         frm.doc.loan_end_date,\r\n          loan_type:             frm.doc.loan_type,\r\n          loan_amount:           frm.doc.loan_amount,\r\n          loan_duration:         frm.doc.loan_duration,\r\n          total_collection:      frm.doc.total_collection,\r\n          interest_rate:         frm.doc.interest_rate,\r\n          emi_amount:            frm.doc.emi_amount\r\n        };\r\n\r\n        // open a new Loan Agreement with all those fields set\r\n        frappe.new_doc('Loan Agreement', args);\r\n      }, __('Create'));\r\n    }\r\n  }\r\n});\r\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Loan Details",
+  "enabled": 1,
+  "modified": "2025-07-19 21:08:34.479006",
+  "module": null,
+  "name": "make Payment",
+  "script": "// still in your Loan Details Custom Script…\r\nfrappe.ui.form.on('EMI Collection', {\r\n  payment_entry: function(frm, cdt, cdn) {\r\n    let row = locals[cdt][cdn];\r\n    let to_pay = flt(row.emi_amount) - flt(row.amount_paid);\r\n    if (to_pay <= 0) {\r\n      frappe.msgprint(__('Nothing left to pay on this EMI.'));\r\n      return;\r\n    }\r\n    frappe.new_doc('Payment Entry', {\r\n      doc: {\r\n        doctype: 'Payment Entry',\r\n        payment_type: 'Receive',\r\n        party_type: 'Customer',\r\n        party: frm.doc.customer,\r\n        paid_amount: to_pay,\r\n        received_amount: to_pay,\r\n        reference_doctype: frm.doctype,\r\n        reference_name: frm.doc.name,\r\n        payment_reference: row.name\r\n      }\r\n    });\r\n  }\r\n});\r\n",
+  "view": "Form"
+ }
+]

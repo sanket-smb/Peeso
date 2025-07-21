@@ -5,6 +5,22 @@ app_description = "loan management app"
 app_email = "hitanshu@smbsolutions.in"
 app_license = "mit"
 
+
+
+fixtures = [
+    "Customer",
+    "Loan Details",
+    "Guarantor",
+    "Vehicle Master",
+    "Client Script",
+    {
+        "dt": "Custom Field",
+        "filters": [
+            ["dt", "in", ["Customer", "Loan Details", "Guarantor", "Vehicle Master"]]
+        ]
+    }
+]
+
 # Apps
 # ------------------
 
