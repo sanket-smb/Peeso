@@ -18,8 +18,13 @@ fixtures = [
         "filters": [
             ["dt", "in", ["Customer", "Loan Details", "Guarantor", "Vehicle Master"]]
         ]
-    }
+    },
+    "Workspace",
+    "Role",
+    "Custom DocPerm",
+    "User Permission"
 ]
+
 
 # Apps
 # ------------------
