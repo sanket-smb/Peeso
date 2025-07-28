@@ -17,6 +17,8 @@
   "column_break_eyaf",
   "total_installments",
   "amended_from",
+  "vehicle",
+  "company",
   "section_break_mffp",
   "loan_type",
   "loan_amount",
@@ -156,6 +158,19 @@
    "fieldtype": "Table",
    "label": "EMI",
    "options": "EMI Collection"
+  },
+  {
+   "fieldname": "vehicle",
+   "fieldtype": "Link",
+   "label": "Vehicle ",
+   "options": "Vehicle Master"
+  },
+  {
+   "default": "Peeso",
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
   }
  ],
  "grid_page_length": 50,
@@ -167,7 +182,7 @@
    "link_fieldname": "name"
   }
  ],
- "modified": "2025-07-07 12:41:54.064757",
+ "modified": "2025-07-22 17:46:59.117348",
  "modified_by": "Administrator",
  "module": "Peeso",
  "name": "Loan Details",
