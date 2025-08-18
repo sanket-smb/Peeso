@@ -10,6 +10,7 @@
   "vehicle_model_year",
   "rto",
   "registration_number",
+  "registration_certificaterc",
   "registration_date",
   "engine_number",
   "chassis_number",
@@ -40,7 +41,7 @@
   {
    "fieldname": "rto",
    "fieldtype": "Data",
-   "label": "RTO"
+   "label": "RTO Location"
   },
   {
    "fieldname": "registration_number",
@@ -94,12 +95,17 @@
    "fieldname": "hp_start_date",
    "fieldtype": "Date",
    "label": "HP Start Date"
+  },
+  {
+   "fieldname": "registration_certificaterc",
+   "fieldtype": "Data",
+   "label": "Registration Certificate(RC)"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-06-15 21:27:45.640926",
+ "modified": "2025-08-11 12:41:18.554716",
  "modified_by": "Administrator",
  "module": "Peeso",
  "name": "Vehicle Master",
