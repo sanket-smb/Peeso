@@ -8,13 +8,16 @@
   "section_break_r3he",
   "amended_from",
   "customer",
-  "google_location",
   "fi_remarks",
   "column_break_oxwn",
   "fi_agent",
   "image_1",
   "image_2",
-  "image_3"
+  "image_3",
+  "section_break_lgra",
+  "google_location",
+  "longitude",
+  "latitude"
  ],
  "fields": [
   {
@@ -33,8 +36,8 @@
   },
   {
    "fieldname": "google_location",
-   "fieldtype": "Link",
-   "label": "Google Location",
+   "fieldtype": "Geolocation",
+   "label": "Location",
    "options": "Location"
   },
   {
@@ -71,13 +74,27 @@
    "fieldname": "fi_agent",
    "fieldtype": "Data",
    "label": "FI Agent"
+  },
+  {
+   "fieldname": "longitude",
+   "fieldtype": "Data",
+   "label": "Longitude"
+  },
+  {
+   "fieldname": "latitude",
+   "fieldtype": "Data",
+   "label": "Latitude"
+  },
+  {
+   "fieldname": "section_break_lgra",
+   "fieldtype": "Section Break"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-08-07 21:56:14.759156",
+ "modified": "2025-08-18 16:23:25.727543",
  "modified_by": "Administrator",
  "module": "Peeso",
  "name": "Field Verification",
