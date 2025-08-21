@@ -19,6 +19,7 @@
   "amended_from",
   "vehicle",
   "company",
+  "amount_paid",
   "section_break_mffp",
   "loan_type",
   "loan_amount",
@@ -171,6 +172,11 @@
    "fieldtype": "Link",
    "label": "Company",
    "options": "Company"
+  },
+  {
+   "fieldname": "amount_paid",
+   "fieldtype": "Currency",
+   "label": "Amount Paid(EMI)"
   }
  ],
  "grid_page_length": 50,
@@ -182,7 +188,7 @@
    "link_fieldname": "name"
   }
  ],
- "modified": "2025-07-22 17:46:59.117348",
+ "modified": "2025-08-19 14:37:24.892159",
  "modified_by": "Administrator",
  "module": "Peeso",
  "name": "Loan Details",
